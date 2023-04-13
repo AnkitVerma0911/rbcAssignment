@@ -1,0 +1,20 @@
+
+Given the tables, the SQL queries would look like:
+
+1. Gets all the clients and its details for a given Advisor.
+
+SELECT c.*, a.*
+FROM [Client Details] AS c
+INNER JOIN ClientAdvisor as ca
+ON c.ClientId = ca.ClientId
+INNER JOIN Advisor AS a
+ON ca.AdvisorId = a.AdvisorId
+WHERE a.name = ‘someName’;
+
+2. Gets the details of all total number of accounts associated with all advisors.
+
+SELECT a.name, COUNT(*) as numberOfAccounts
+FROM Advisor AS a
+FULL OUTER JOIN ClientAdvisor as ca
+ON a.AdvisorId = ca.AdvisorId
+GROUP BY a.name;

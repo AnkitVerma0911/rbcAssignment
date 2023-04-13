@@ -1,0 +1,29 @@
+PART 1 - Manual testing: 
+The API below is designed to return all posts for the users in the Example.com web site: 
+https://jsonplaceholder.typicode.com/posts 
+After testing the API, your goal is to create a free-form document in which you will define and describe your test process/activities on the API.
+
+Steps followed to manually test given API in Postman:
+1.	Open Postman.
+2.	Go to Collections tab and create new Collection, name it “RBC Assignment API test”.
+3.	Add a request to collection and name it “Return all Posts for the Users”.
+4.	Set HTTP Method to “GET”.
+5.	Enter API endpoint URL as “https://jsonplaceholder.typicode.com/posts”.
+6.	Under “Headers” tab enter Key as “Content-Type” and Value as “application/json”.
+7.	Click on “Send” button.
+8.	Verify the status code. If it says “200 OK” that means the request was processed successfully and the server has provided a response body.
+9.	Check response body, it should have an array of objects with each object having 4 keys – “userId”, “id”, “title” and “body” with respective values for each key.
+10.	Under the “Tests” tab, we can also test the response by adding tests:
+a.	For status code validation: -
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+b.	For response body schema validation: -
+First pass the response schema in a constant variable like const schema = {};
+Then write a test like this
+pm.test("JSON Schema Validation", () => {
+   pm.response.to.have.jsonSchema(schema);
+});
+11.	We can also verify the response time to check for any performance issues with the API endpoint.
+12.	For negative test, we can change the endpoint URL to “https://jsonplaceholder.typicode.com/posts123” and verify that the above-mentioned tests in step 10 are failing and the status code is as defined in requirements.
+13.	More negative tests can be done by changing the HTTP method and verify that tests in step 10 fail and the actual status code matches the one in requirements.
